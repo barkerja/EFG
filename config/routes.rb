@@ -79,7 +79,7 @@ EFG::Application.routes.draw do
     resource :update_lending_limit, only: [:new, :create], controller: 'update_loan_lending_limits'
 
     resources :data_corrections, only: [:index, :new, :create]
-    resources :loan_changes, only: [:new, :create]
+    resources :loan_changes, only: [:index, :new, :create]
     resources :loan_modifications, only: [:index, :show]
     resources :recoveries, only: [:new, :create]
 
