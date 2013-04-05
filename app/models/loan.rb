@@ -188,6 +188,10 @@ class Loan < ActiveRecord::Base
     premium_schedules.last
   end
 
+  def has_drawdowns?
+    premium_schedule && premium_schedule.has_drawdowns?
+  end
+
   def loan_category
     LoanCategory.find(loan_category_id)
   end
