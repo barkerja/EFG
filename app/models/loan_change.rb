@@ -1,5 +1,16 @@
 class LoanChange < LoanModification
-  validates_inclusion_of :change_type_id, in: %w(2 3 4 5 6 7 8 a), strict: true
+  ALLOWED_CHANGE_TYPE_IDS = [
+    ChangeType::CapitalRepaymentHoliday,
+    ChangeType::ChangeRepayments,
+    ChangeType::ExtendTerm,
+    ChangeType::LenderDemandSatisfied,
+    ChangeType::LumpSumRepayment,
+    ChangeType::RecordAgreedDraw,
+    ChangeType::ReprofileDraws,
+    ChangeType::DecreaseTerm
+  ].map(&:id)
+
+  validates_inclusion_of :change_type_id, in: ALLOWED_CHANGE_TYPE_IDS, strict: true
   validate :validate_non_negative_amounts
 
   private
