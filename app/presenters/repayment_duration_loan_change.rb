@@ -1,5 +1,5 @@
 class RepaymentDurationLoanChange < LoanChangePresenter
-  attr_reader :maturity_date, :added_months, :repayment_duration
+  attr_reader :added_months, :repayment_duration
   attr_accessible :added_months
 
   validate :validate_added_months
@@ -15,6 +15,9 @@ class RepaymentDurationLoanChange < LoanChangePresenter
   end
 
   private
+    attr_accessor :maturity_date
+    attr_writer :repayment_duration
+
     def months_per_repayment_period
       loan.repayment_frequency.try(:months_per_repayment_period) || 1
     end
@@ -43,7 +46,7 @@ class RepaymentDurationLoanChange < LoanChangePresenter
         errors.add(:added_months, :must_have_a_positive_repayment_duration_at_next_premium)
       else
         rd = RepaymentDuration.new(loan)
-        @repayment_duration = loan.repayment_duration.total_months + added_months
+        self.repayment_duration = loan.repayment_duration.total_months + added_months
 
         if repayment_duration <= 0
           errors.add(:added_months, :must_be_gt_zero)
@@ -54,7 +57,7 @@ class RepaymentDurationLoanChange < LoanChangePresenter
         end
 
         initial_draw_date = loan.initial_draw_change.date_of_change
-        @maturity_date = initial_draw_date.advance(months: @repayment_duration)
+        self.maturity_date = initial_draw_date.advance(months: repayment_duration)
       end
     end
 end
