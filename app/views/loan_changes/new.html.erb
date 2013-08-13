@@ -23,7 +23,7 @@
   <%= field_set_tag 'Draw Information' do %>
     <%= simple_form_row 'Next quarterly Premium month due', @presenter.next_premium_cheque_month %>
     <%= f.input :initial_draw_amount, as: :currency %>
-    <%= simple_form_row 'Outstanding loan term at the next quarterly Premium collection point', @presenter.repayment_duration_at_next_premium %>
+    <%= simple_form_row 'Outstanding loan term at the next quarterly Premium collection point', @presenter.current_repayment_duration_at_next_premium %>
 
     <hr>
 

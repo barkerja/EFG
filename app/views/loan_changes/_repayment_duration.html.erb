@@ -1,3 +1,4 @@
 <%= simple_form_row 'Current maturity date', @loan.maturity_date.to_s(:screen) %>
+<%= simple_form_row 'Original loan term', @loan.repayment_duration.total_months %>
 
 <%= f.input :added_months, input_html: { class: 'input-mini' } %>

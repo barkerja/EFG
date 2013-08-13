@@ -40,7 +40,7 @@ en:
 
       loan_change:
         date_of_change: 'What is the date when the change to be recorded occurred?'
-        added_months: Added months
+        added_months: Months to add/remove
         amount_drawn: 'What is the amount now being drawn that is to be recorded? (This should include any further draws it is known will take place before the next Premium Payment is due)'
         lump_sum_repayment: 'What is the amount of the lump sum repayment?'
         initial_draw_amount: 'What is the outstanding balance at the next quarterly Premium collection point, taking account of any draws or repayments which may be made between now and the relevant quarter date?'

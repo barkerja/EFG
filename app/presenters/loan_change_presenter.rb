@@ -44,6 +44,10 @@ class LoanChangePresenter
     end
   end
 
+  def current_repayment_duration_at_next_premium
+    loan.repayment_duration.total_months - number_of_months_from_start_date_to_next_collection
+  end
+
   def date_of_change=(value)
     @date_of_change = QuickDateFormatter.parse(value)
   end
@@ -64,10 +68,6 @@ class LoanChangePresenter
     @premium_schedule ||= loan.premium_schedules.new do |premium_schedule|
       premium_schedule.calc_type = PremiumSchedule::RESCHEDULE_TYPE
     end
-  end
-
-  def repayment_duration_at_next_premium
-    loan.repayment_duration.total_months - number_of_months_from_start_date_to_next_collection
   end
 
   def save
@@ -120,6 +120,10 @@ class LoanChangePresenter
       months = (difference_in_months.to_f / 3).ceil * 3
       months += 3 if today.beginning_of_month == initial_draw_date.advance(months: months).beginning_of_month
       months
+    end
+
+    def repayment_duration_at_next_premium
+      current_repayment_duration_at_next_premium
     end
 
     def update_loan

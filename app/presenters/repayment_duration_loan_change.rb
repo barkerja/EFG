@@ -8,12 +8,6 @@ class RepaymentDurationLoanChange < LoanChangePresenter
     @added_months = value.present? ? value.to_i : nil
   end
 
-  def repayment_duration_at_next_premium
-    months = super
-    months += added_months if added_months
-    months
-  end
-
   private
     attr_accessor :maturity_date
     attr_writer :repayment_duration
@@ -33,6 +27,12 @@ class RepaymentDurationLoanChange < LoanChangePresenter
       loan_change.old_repayment_duration = loan.repayment_duration.total_months
       loan_change.maturity_date = maturity_date
       loan_change.old_maturity_date = loan.maturity_date
+    end
+
+    def repayment_duration_at_next_premium
+      months = super
+      months += added_months if added_months
+      months
     end
 
     def validate_added_months
