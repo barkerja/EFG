@@ -16,13 +16,11 @@ class LoanChangePresenter
   before_save :update_loan_change
   before_save :update_loan
 
-  attr_accessor :created_by
-  attr_reader :date_of_change, :loan
+  attr_reader :created_by, :date_of_change, :loan
   attr_accessible :date_of_change, :initial_draw_amount, :second_draw_amount,
     :second_draw_months, :third_draw_amount, :third_draw_months,
     :fourth_draw_amount, :fourth_draw_months, :initial_capital_repayment_holiday
 
-  validates :created_by, presence: true, strict: true
   validates :date_of_change, presence: true
 
   delegate :initial_draw_amount, :initial_draw_amount=, to: :premium_schedule
@@ -34,8 +32,9 @@ class LoanChangePresenter
   delegate :fourth_draw_amount, :fourth_draw_amount=, to: :premium_schedule
   delegate :fourth_draw_months, :fourth_draw_months=, to: :premium_schedule
 
-  def initialize(loan)
+  def initialize(loan, created_by)
     @loan = loan
+    @created_by = created_by
   end
 
   def attributes=(attributes)

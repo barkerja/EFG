@@ -16,8 +16,7 @@ class LoanChangesController < ApplicationController
   end
 
   def create
-    @presenter.attributes = params[:loan_change]
-    @presenter.created_by = current_user
+    @presenter.attributes = params.fetch(:loan_change, {})
 
     if @presenter.save
       redirect_to loan_url(@loan)
@@ -35,7 +34,7 @@ class LoanChangesController < ApplicationController
       klass = TYPES[params[:type]]
 
       if klass
-        @presenter = klass.new(@loan)
+        @presenter = klass.new(@loan, current_user)
       else
         redirect_to action: :index
       end
