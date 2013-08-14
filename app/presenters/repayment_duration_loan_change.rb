@@ -4,6 +4,9 @@ class RepaymentDurationLoanChange < LoanChangePresenter
 
   validate :validate_added_months
 
+  before_save :update_loan_change
+  before_save :update_loan
+
   def added_months=(value)
     @added_months = value.present? ? value.to_i : nil
   end

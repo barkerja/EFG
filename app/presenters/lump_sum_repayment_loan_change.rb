@@ -4,6 +4,8 @@ class LumpSumRepaymentLoanChange < LoanChangePresenter
 
   validate :validate_lump_sum_repayment
 
+  before_save :update_loan_change
+
   def lump_sum_repayment=(value)
     @lump_sum_repayment = value.present? ? Money.parse(value) : nil
   end

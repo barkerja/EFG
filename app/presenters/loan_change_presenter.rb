@@ -13,9 +13,6 @@ class LoanChangePresenter
 
   define_model_callbacks :save
 
-  before_save :update_loan_change
-  before_save :update_loan
-
   attr_reader :created_by, :date_of_change, :loan
   attr_accessible :date_of_change, :initial_draw_amount, :second_draw_amount,
     :second_draw_months, :third_draw_amount, :third_draw_months,
@@ -123,11 +120,5 @@ class LoanChangePresenter
 
     def repayment_duration_at_next_premium
       current_repayment_duration_at_next_premium
-    end
-
-    def update_loan
-    end
-
-    def update_loan_change
     end
 end
