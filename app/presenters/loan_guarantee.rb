@@ -37,7 +37,7 @@ class LoanGuarantee
 
   private
     def set_maturity_date
-      loan.maturity_date = initial_draw_date.advance(months: loan.repayment_duration.total_months, days: 1)
+      loan.maturity_date = initial_draw_date.advance(months: loan.repayment_duration.total_months)
     end
 
     def create_initial_draw_change!
