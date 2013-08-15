@@ -25,7 +25,7 @@ class EligibilityCheck
     add_error(:previous_borrowing) unless loan.previous_borrowing?
     add_error(:private_residence_charge_required) if loan.private_residence_charge_required?
     add_error(:sic_code) unless loan.sic_eligible?
-    add_error(:trading_date) if loan.trading_date > Date.today.advance(months: 6)
+    add_error(:trading_date) if loan.trading_date > Date.current.advance(months: 6)
     check_repayment_duration
   end
 

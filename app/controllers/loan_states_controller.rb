@@ -16,7 +16,7 @@ class LoanStatesController < ApplicationController
       format.csv {
         loans = scope.includes(:initial_draw_change)
         csv_export = LoanCsvExport.new(loans)
-        filename = "#{params[:id]}_loans_#{Date.today.to_s(:db)}.csv"
+        filename = "#{params[:id]}_loans_#{Date.current.to_s(:db)}.csv"
         stream_response(csv_export, filename)
       }
     end

@@ -28,7 +28,7 @@ describe 'loan demand to borrower' do
     current_path.should == loan_path(loan)
 
     loan.state.should == Loan::LenderDemand
-    loan.borrower_demanded_on.should == Date.today
+    loan.borrower_demanded_on.should == Date.current
     loan.amount_demanded.should == Money.new(10_000_00) # 10000.00
     loan.modified_by.should == current_user
 
@@ -36,7 +36,7 @@ describe 'loan demand to borrower' do
 
     demand_to_borrower = loan.demand_to_borrowers.last!
     demand_to_borrower.created_by.should == current_user
-    demand_to_borrower.date_of_demand.should == Date.today
+    demand_to_borrower.date_of_demand.should == Date.current
     demand_to_borrower.demanded_amount.should == Money.new(10_000_00)
     demand_to_borrower.modified_date.should == Date.current
   end

@@ -26,7 +26,7 @@ class LoansController < ApplicationController
   end
 
   def generate_csv(loan)
-    filename = "loan_#{@loan.reference}_#{Date.today.to_s(:db)}.csv"
+    filename = "loan_#{@loan.reference}_#{Date.current.to_s(:db)}.csv"
     csv_export = LoanCsvExport.new([ loan ])
     stream_response(csv_export, filename)
   end

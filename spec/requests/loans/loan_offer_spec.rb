@@ -24,7 +24,7 @@ describe 'loan offer' do
     current_path.should == loan_path(loan)
 
     loan.state.should == Loan::Offered
-    loan.facility_letter_date.should == Date.today
+    loan.facility_letter_date.should == Date.current
     loan.facility_letter_sent.should == true
     loan.modified_by.should == current_user
 

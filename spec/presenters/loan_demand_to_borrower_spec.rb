@@ -40,7 +40,7 @@ describe LoanDemandToBorrower do
       loan_demand_to_borrower.borrower_demanded_on = 1.day.from_now
       loan_demand_to_borrower.should_not be_valid
 
-      loan_demand_to_borrower.borrower_demanded_on = Date.today
+      loan_demand_to_borrower.borrower_demanded_on = Date.current
       loan_demand_to_borrower.should be_valid
     end
   end

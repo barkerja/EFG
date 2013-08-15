@@ -128,8 +128,8 @@ describe RealisationStatementReceived do
       end
 
       it 'updates realised_money_date on all loans' do
-        loan1.reload.realised_money_date.should == Date.today
-        loan2.reload.realised_money_date.should == Date.today
+        loan1.reload.realised_money_date.should == Date.current
+        loan2.reload.realised_money_date.should == Date.current
       end
 
       it 'creates loan realisation for each recovery' do

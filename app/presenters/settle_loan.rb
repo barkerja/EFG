@@ -62,7 +62,7 @@ class SettleLoan
 
     self.modified_by = modifier
     loan.invoice = invoice
-    loan.settled_on = Date.today
+    loan.settled_on = Date.current
     loan.settled_amount = self.settled_amount
     save
   end

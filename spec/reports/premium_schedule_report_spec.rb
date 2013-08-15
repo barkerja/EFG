@@ -140,7 +140,7 @@ describe PremiumScheduleReport do
     let(:loan2) { FactoryGirl.create(:loan, :guaranteed, loan_scheme: 'E', loan_source: 'S', reference: 'ABC') }
     let(:loan3) { FactoryGirl.create(:loan, :guaranteed, loan_scheme: 'S', loan_source: 'S') }
     let!(:premium_schedule1) { FactoryGirl.create(:premium_schedule, loan: loan1, calc_type: 'S', premium_cheque_month: '01/2011') }
-    let!(:premium_schedule2) { FactoryGirl.create(:premium_schedule, loan: loan2, calc_type: 'R', premium_cheque_month: "01/#{Date.today.year + 1}") }
+    let!(:premium_schedule2) { FactoryGirl.create(:premium_schedule, loan: loan2, calc_type: 'R', premium_cheque_month: "01/#{Date.current.year + 1}") }
     let!(:premium_schedule3) { FactoryGirl.create(:premium_schedule, loan: loan3, calc_type: 'N', premium_cheque_month: '02/2011') }
 
     before do
@@ -268,8 +268,8 @@ describe PremiumScheduleReport do
         end
 
         it 'includes all rescheduled loans' do
-          FactoryGirl.create(:premium_schedule, loan: loan1, calc_type: 'R', premium_cheque_month: "03/#{Date.today.year + 1}")
-          FactoryGirl.create(:premium_schedule, loan: loan3, calc_type: 'R', premium_cheque_month: "03/#{Date.today.year + 1}")
+          FactoryGirl.create(:premium_schedule, loan: loan1, calc_type: 'R', premium_cheque_month: "03/#{Date.current.year + 1}")
+          FactoryGirl.create(:premium_schedule, loan: loan3, calc_type: 'R', premium_cheque_month: "03/#{Date.current.year + 1}")
 
           loan_ids.should include(loan1.id)
           loan_ids.should include(loan2.id)
@@ -289,13 +289,13 @@ describe PremiumScheduleReport do
 
         context 'with collection_month' do
           before do
-            FactoryGirl.create(:premium_schedule, loan: loan1, calc_type: 'R', premium_cheque_month: "04/#{Date.today.year + 1}")
-            FactoryGirl.create(:premium_schedule, loan: loan2, calc_type: 'R', premium_cheque_month: "04/#{Date.today.year + 1}")
-            FactoryGirl.create(:premium_schedule, loan: loan3, calc_type: 'R', premium_cheque_month: "05/#{Date.today.year + 1}")
+            FactoryGirl.create(:premium_schedule, loan: loan1, calc_type: 'R', premium_cheque_month: "04/#{Date.current.year + 1}")
+            FactoryGirl.create(:premium_schedule, loan: loan2, calc_type: 'R', premium_cheque_month: "04/#{Date.current.year + 1}")
+            FactoryGirl.create(:premium_schedule, loan: loan3, calc_type: 'R', premium_cheque_month: "05/#{Date.current.year + 1}")
           end
 
           it do
-            premium_schedule_report.collection_month = "04/#{Date.today.year + 1}"
+            premium_schedule_report.collection_month = "04/#{Date.current.year + 1}"
 
             loan_ids.should include(loan1.id)
             loan_ids.should include(loan2.id)
@@ -303,7 +303,7 @@ describe PremiumScheduleReport do
           end
 
           it do
-            premium_schedule_report.collection_month = "04/#{Date.today.year + 2}"
+            premium_schedule_report.collection_month = "04/#{Date.current.year + 2}"
 
             loan_ids.should_not include(loan1.id)
             loan_ids.should_not include(loan2.id)

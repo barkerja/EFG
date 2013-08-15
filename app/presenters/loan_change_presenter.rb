@@ -108,7 +108,7 @@ class LoanChangePresenter
     end
 
     def number_of_months_from_start_date_to_next_collection
-      today = Date.today
+      today = Date.current
       today_months = today.year * 12 + today.month
       initial_draw_date_months = initial_draw_date.year * 12 + initial_draw_date.month
       difference_in_months = today_months - initial_draw_date_months

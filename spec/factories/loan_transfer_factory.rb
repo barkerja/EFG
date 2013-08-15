@@ -11,7 +11,7 @@ FactoryGirl.define do
     end
 
     factory :legacy_sflg_loan_transfer, class: LoanTransfer::LegacySflg do
-      initial_draw_date { Date.today }
+      initial_draw_date { Date.current }
     end
 
     initialize_with {

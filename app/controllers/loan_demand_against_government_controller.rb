@@ -5,14 +5,14 @@ class LoanDemandAgainstGovernmentController < ApplicationController
   def new
     @loan = current_lender.loans.find(params[:loan_id])
     @loan_demand_against_government = LoanDemandAgainstGovernment.new(@loan)
-    @loan_demand_against_government.dti_demanded_on = Date.today
+    @loan_demand_against_government.dti_demanded_on = Date.current
   end
 
   def create
     @loan = current_lender.loans.find(params[:loan_id])
     @loan_demand_against_government = LoanDemandAgainstGovernment.new(@loan)
     @loan_demand_against_government.attributes = params[:loan_demand_against_government]
-    @loan_demand_against_government.dti_demanded_on = Date.today
+    @loan_demand_against_government.dti_demanded_on = Date.current
     @loan_demand_against_government.modified_by = current_user
 
     if @loan_demand_against_government.save

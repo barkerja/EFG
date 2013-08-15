@@ -20,7 +20,7 @@ describe 'satisfy lender demand' do
     loan_change.change_type.should == ChangeType::LenderDemandSatisfied
     loan_change.created_by.should == current_user
     loan_change.date_of_change.should == Date.new(2013, 3, 28)
-    loan_change.modified_date.should == Date.today
+    loan_change.modified_date.should == Date.current
 
     should_log_loan_state_change(loan, Loan::Guaranteed, 9, current_user)
   end

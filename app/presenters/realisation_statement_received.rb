@@ -106,7 +106,7 @@ class RealisationStatementReceived
     loan_ids = realised_recoveries.map {|recovery| recovery.loan.id }.uniq
 
     Loan.find(loan_ids).each do |loan|
-      loan.realised_money_date = Date.today
+      loan.realised_money_date = Date.current
       loan.modified_by = creator
       loan.update_state!(Loan::Realised, LoanEvent::RealiseMoney, creator)
     end

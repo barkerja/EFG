@@ -3,7 +3,7 @@ FactoryGirl.define do
     received_declaration true
     signed_direct_debit_received true
     first_pp_received true
-    initial_draw_date Date.today
+    initial_draw_date Date.current
 
     initialize_with {
       loan = FactoryGirl.build(:loan, :offered)

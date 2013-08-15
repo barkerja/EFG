@@ -12,7 +12,7 @@ class LoanAuditReportsController < ApplicationController
       respond_to do |format|
         format.html { render 'summary' }
         format.csv do
-          filename = "#{Date.today.to_s(:db)}_loan_audit_report.csv"
+          filename = "#{Date.current.to_s(:db)}_loan_audit_report.csv"
           csv_export = LoanAuditReportCsvExport.new(@loan_audit_report.loans)
           stream_response(csv_export, filename)
         end

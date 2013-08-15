@@ -44,7 +44,7 @@ class LoanDemandToBorrower
     end
 
     def borrower_demanded_on_is_not_in_the_future
-      if borrower_demanded_on > Date.today
+      if borrower_demanded_on > Date.current
         errors.add(:borrower_demanded_on, :cannot_be_in_the_future)
       end
     end

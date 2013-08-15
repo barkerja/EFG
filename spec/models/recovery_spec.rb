@@ -28,7 +28,7 @@ describe Recovery do
     end
 
     it 'recovered_on must be after its loan was settled' do
-      recovery.loan.settled_on = Date.today
+      recovery.loan.settled_on = Date.current
       recovery.recovered_on = 1.day.ago
       recovery.should_not be_valid
     end
@@ -78,7 +78,7 @@ describe Recovery do
       Recovery.new.tap { |recovery|
         recovery.loan = loan
         recovery.created_by = FactoryGirl.build(:user)
-        recovery.recovered_on = Date.today
+        recovery.recovered_on = Date.current
       }
     }
 

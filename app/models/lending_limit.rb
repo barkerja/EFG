@@ -62,7 +62,7 @@ class LendingLimit < ActiveRecord::Base
 
   def available?
     ends_on_with_grace_period = ends_on.advance(days: 30)
-    active && (starts_on..ends_on_with_grace_period).cover?(Date.today)
+    active && (starts_on..ends_on_with_grace_period).cover?(Date.current)
   end
 
   def unavailable?

@@ -181,7 +181,7 @@ class PremiumSchedule < ActiveRecord::Base
         return
       end
 
-      errors.add(:premium_cheque_month, :invalid) unless date > Date.today.end_of_month
+      errors.add(:premium_cheque_month, :invalid) unless date > Date.current.end_of_month
     end
 
     def total_draw_amount

@@ -62,7 +62,7 @@ describe RealiseLoansController do
       end
 
       it "sets filename for CSV" do
-        expected_filename = "loan_recoveries_#{lender.name.parameterize}_#{Date.today.strftime('%Y-%m-%d')}.csv"
+        expected_filename = "loan_recoveries_#{lender.name.parameterize}_#{Date.current.strftime('%Y-%m-%d')}.csv"
         response.headers['Content-Disposition'].should include(%Q(filename="#{expected_filename}"))
       end
     end

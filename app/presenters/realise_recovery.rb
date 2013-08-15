@@ -40,7 +40,7 @@ class RealiseRecovery
     realisation.realised_loan = loan
     realisation.created_by = modifier
     realisation.realised_amount = amount_due_to_dti
-    realisation.realised_on = Date.today
+    realisation.realised_on = Date.current
     realisation.post_claim_limit = post_claim_limit?
     realisation.save!
   end

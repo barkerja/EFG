@@ -191,7 +191,7 @@ describe 'Loan lifecycle' do
   def reprofile_draws(loan)
     click_link "Change Amount or Terms"
     click_link 'Reprofile Draws'
-    fill_in 'loan_change_date_of_change', with: Date.today.to_s(:screen)
+    fill_in 'loan_change_date_of_change', with: Date.current.to_s(:screen)
     fill_in 'loan_change_initial_draw_amount', with: '9,876.54'
     click_button 'Submit'
 
@@ -235,7 +235,7 @@ describe 'Loan lifecycle' do
 
   def satisfy_lender_demand(loan)
     click_link 'Lender Demand Satisfied'
-    fill_in 'loan_satisfy_lender_demand_date_of_change', with: Date.today.to_s(:screen)
+    fill_in 'loan_satisfy_lender_demand_date_of_change', with: Date.current.to_s(:screen)
     click_button 'Submit'
 
     current_url.should == loan_url(loan)
@@ -245,9 +245,9 @@ describe 'Loan lifecycle' do
     click_link "Invoice Received"
     select lender.name, from: 'invoice_lender_id'
     fill_in 'invoice_reference', with: '2006-SADHJ'
-    select next_quarter_month_name(Date.today), from: 'invoice_period_covered_quarter'
-    fill_in 'invoice_period_covered_year', with: Date.today.year
-    fill_in 'invoice_received_on', with: Date.today.to_s(:screen)
+    select next_quarter_month_name(Date.current), from: 'invoice_period_covered_quarter'
+    fill_in 'invoice_period_covered_year', with: Date.current.year
+    fill_in 'invoice_received_on', with: Date.current.to_s(:screen)
     click_button "Select Loans"
 
     within("#settle_loan_#{loan.id}") do
@@ -261,9 +261,9 @@ describe 'Loan lifecycle' do
     click_link "Recoveries Statement Received"
     select lender.name, from: 'realisation_statement_lender_id'
     fill_in 'realisation_statement_reference', with: "ABC123"
-    select next_quarter_month_name(Date.today), from: 'realisation_statement_period_covered_quarter'
-    fill_in 'realisation_statement_period_covered_year', with: Date.today.year
-    fill_in 'realisation_statement_received_on', with: Date.today.to_s(:screen)
+    select next_quarter_month_name(Date.current), from: 'realisation_statement_period_covered_quarter'
+    fill_in 'realisation_statement_period_covered_year', with: Date.current.year
+    fill_in 'realisation_statement_received_on', with: Date.current.to_s(:screen)
     click_button 'Select Loans'
 
     within "#realise_recovery_#{loan.recoveries.last.id}" do

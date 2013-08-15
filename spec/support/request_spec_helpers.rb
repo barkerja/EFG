@@ -71,7 +71,7 @@ module RequestSpecHelpers
 
   def calculate_state_aid(loan)
     click_button 'State Aid Calculation'
-    page.fill_in 'premium_schedule_initial_draw_year', with: Date.today.year
+    page.fill_in 'premium_schedule_initial_draw_year', with: Date.current.year
     page.fill_in 'premium_schedule_initial_draw_amount', with: loan.amount.to_s
     page.fill_in 'premium_schedule_repayment_duration', with: '12'
     click_button 'Submit'
@@ -81,12 +81,12 @@ module RequestSpecHelpers
 
   def fill_in_valid_loan_offer_details(loan)
     choose 'loan_offer_facility_letter_sent_true'
-    fill_in 'loan_offer_facility_letter_date', with: Date.today.to_s(:screen)
+    fill_in 'loan_offer_facility_letter_date', with: Date.current.to_s(:screen)
   end
 
   # Loan Guarantee
   def fill_in_valid_loan_guarantee_details(fields = {})
-    fields.reverse_merge!(initial_draw_date: Date.today.to_s(:screen))
+    fields.reverse_merge!(initial_draw_date: Date.current.to_s(:screen))
 
     choose 'loan_guarantee_received_declaration_true'
     choose 'loan_guarantee_signed_direct_debit_received_true'
@@ -97,19 +97,19 @@ module RequestSpecHelpers
   # Loan Demand to Borrower
   def fill_in_valid_demand_to_borrower_details
     fill_in 'loan_demand_to_borrower_amount_demanded', with: '10000'
-    fill_in 'loan_demand_to_borrower_borrower_demanded_on', with: Date.today.to_s(:screen)
+    fill_in 'loan_demand_to_borrower_borrower_demanded_on', with: Date.current.to_s(:screen)
   end
 
   # Loan Recovery
   def fill_in_valid_efg_recovery_details
-    fill_in 'recovery_recovered_on', with: Date.today.to_s(:screen)
+    fill_in 'recovery_recovered_on', with: Date.current.to_s(:screen)
     fill_in 'recovery_outstanding_non_efg_debt', with: '£2500.00'
     fill_in 'recovery_non_linked_security_proceeds', with: '£3000.00'
     fill_in 'recovery_linked_security_proceeds', with: '£1000.00'
   end
 
   def fill_in_valid_sflg_recovery_details
-    fill_in 'recovery_recovered_on', with: Date.today.to_s(:screen)
+    fill_in 'recovery_recovered_on', with: Date.current.to_s(:screen)
     fill_in 'recovery_total_liabilities_behind', with: '£123'
     fill_in 'recovery_total_liabilities_after_demand', with: '£234'
     fill_in 'recovery_additional_interest_accrued', with: '£345'

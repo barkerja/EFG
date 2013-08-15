@@ -201,12 +201,12 @@ describe PremiumSchedule do
       end
 
       it "is not valid when premium cheque month is current month" do
-        rescheduled_premium_schedule.premium_cheque_month = Date.today.strftime('%m/%Y')
+        rescheduled_premium_schedule.premium_cheque_month = Date.current.strftime('%m/%Y')
         rescheduled_premium_schedule.should_not be_valid
       end
 
       it "is valid when premium cheque month is next month" do
-        rescheduled_premium_schedule.premium_cheque_month = Date.today.next_month.strftime('%m/%Y')
+        rescheduled_premium_schedule.premium_cheque_month = Date.current.next_month.strftime('%m/%Y')
         rescheduled_premium_schedule.should be_valid
       end
 

@@ -14,7 +14,7 @@ describe 'Remove Guarantee' do
     visit loan_path(loan)
     click_link 'Remove Guarantee'
 
-    fill_in 'loan_remove_guarantee_remove_guarantee_on', with: Date.today.to_s(:screen)
+    fill_in 'loan_remove_guarantee_remove_guarantee_on', with: Date.current.to_s(:screen)
     fill_in 'loan_remove_guarantee_remove_guarantee_outstanding_amount', with: '10000'
     fill_in 'loan_remove_guarantee_remove_guarantee_reason', with: 'n/a/'
     click_button 'Remove Guarantee'

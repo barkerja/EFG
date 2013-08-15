@@ -5,7 +5,7 @@ FactoryGirl.define do
     end
 
     association :modified_by, factory: :lender_user
-    date_of_change Date.today
+    date_of_change Date.current
 
     initialize_with do
       new(loan)

@@ -50,7 +50,7 @@ describe LoanReport do
       loan1.update_attribute(:facility_letter_date, 1.day.ago)
       loan2.update_attribute(:facility_letter_date, 1.day.from_now)
 
-      loan_report.facility_letter_start_date = Date.today
+      loan_report.facility_letter_start_date = Date.current
       loan_report.loans.should == [loan2]
     end
 
@@ -58,7 +58,7 @@ describe LoanReport do
       loan1.update_attribute(:facility_letter_date, 1.day.ago)
       loan2.update_attribute(:facility_letter_date, 1.day.from_now)
 
-      loan_report.facility_letter_end_date = Date.today
+      loan_report.facility_letter_end_date = Date.current
       loan_report.loans.should == [loan1]
     end
 
@@ -66,7 +66,7 @@ describe LoanReport do
       loan1.update_attribute(:created_at, 1.day.ago)
       loan2.update_attribute(:created_at, 1.day.from_now)
 
-      loan_report.created_at_start_date = Date.today
+      loan_report.created_at_start_date = Date.current
       loan_report.loans.should == [loan2]
     end
 
@@ -74,7 +74,7 @@ describe LoanReport do
       loan1.update_attribute(:created_at, 1.day.ago)
       loan2.update_attribute(:created_at, 1.day.from_now)
 
-      loan_report.created_at_end_date = Date.today
+      loan_report.created_at_end_date = Date.current
       loan_report.loans.should == [loan1]
     end
 

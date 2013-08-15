@@ -110,7 +110,7 @@ describe 'loan recovery' do
       recovery = Recovery.last
       recovery.loan.should == loan
       recovery.seq.should == 3
-      recovery.recovered_on.should == Date.today
+      recovery.recovered_on.should == Date.current
       recovery.total_proceeds_recovered.should == Money.new(100_000_91)
       recovery.total_liabilities_behind.should == Money.new(123_00)
       recovery.total_liabilities_after_demand.should == Money.new(234_00)
@@ -120,7 +120,7 @@ describe 'loan recovery' do
 
       loan.reload
       loan.state.should == Loan::Recovered
-      loan.recovery_on.should == Date.today
+      loan.recovery_on.should == Date.current
       loan.modified_by.should == current_user
 
       current_path.should == loan_path(loan)
@@ -187,7 +187,7 @@ describe 'loan recovery' do
       recovery = Recovery.last
       recovery.loan.should == loan
       recovery.seq.should == 1
-      recovery.recovered_on.should == Date.today
+      recovery.recovered_on.should == Date.current
       recovery.total_proceeds_recovered.should == Money.new(6_789_00)
       recovery.outstanding_non_efg_debt.should == Money.new(2_500_00)
       recovery.non_linked_security_proceeds.should == Money.new(3_000_00)
@@ -197,7 +197,7 @@ describe 'loan recovery' do
 
       loan.reload
       loan.state.should == Loan::Recovered
-      loan.recovery_on.should == Date.today
+      loan.recovery_on.should == Date.current
       loan.modified_by.should == current_user
     end
 end

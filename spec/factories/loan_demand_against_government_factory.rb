@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :loan_demand_against_government do
     dti_demand_outstanding 10_000
-    dti_demanded_on Date.today
+    dti_demanded_on Date.current
     dti_ded_code { build(:ded_code).code }
 
     initialize_with {

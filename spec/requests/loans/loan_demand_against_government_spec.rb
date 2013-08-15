@@ -28,7 +28,7 @@ describe 'loan demand against government' do
     loan.state.should == Loan::Demanded
     loan.dti_demand_outstanding.should == Money.new(10_000_00)
     loan.dti_amount_claimed.should_not be_nil
-    loan.dti_demanded_on.should == Date.today
+    loan.dti_demanded_on.should == Date.current
     loan.ded_code.should == ded_code
     loan.dti_reason.should == 'Something'
     loan.modified_by.should == current_user
