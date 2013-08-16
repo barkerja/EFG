@@ -17,7 +17,6 @@ class DataCorrectionsController < ApplicationController
 
   def create
     @presenter.attributes = params[:data_correction]
-    @presenter.created_by = current_user
 
     if @presenter.save
       redirect_to loan_url(@loan)
@@ -35,7 +34,7 @@ class DataCorrectionsController < ApplicationController
       klass = TYPES[params[:type]]
 
       if klass
-        @presenter = klass.new(@loan)
+        @presenter = klass.new(@loan, current_user)
       else
         redirect_to action: :index
       end

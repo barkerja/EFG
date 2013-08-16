@@ -11,11 +11,11 @@ class DataCorrectionPresenter
 
   define_model_callbacks :save
 
-  attr_accessor :created_by
-  attr_reader :loan
+  attr_reader :created_by, :loan
 
-  def initialize(loan)
+  def initialize(loan, created_by)
     @loan = loan
+    @created_by = created_by
   end
 
   def attributes=(attributes)
