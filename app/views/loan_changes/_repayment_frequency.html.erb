@@ -1,0 +1,3 @@
+<%= simple_form_row 'Current repayment frequency', @loan.repayment_frequency.name %>
+
+<%= f.input :repayment_frequency_id, as: :select, collection: RepaymentFrequencyLoanChange::ValidRepaymentFrequencies %>

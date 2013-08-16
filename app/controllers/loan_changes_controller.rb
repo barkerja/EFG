@@ -2,7 +2,8 @@ class LoanChangesController < ApplicationController
   TYPES = {
     'lump_sum_repayment' => LumpSumRepaymentLoanChange,
     'repayment_duration' => RepaymentDurationLoanChange,
-    'reprofile_draws' => ReprofileDrawsLoanChange
+    'repayment_frequency' => RepaymentFrequencyLoanChange,
+    'reprofile_draws' => ReprofileDrawsLoanChange,
   }
 
   before_filter :verify_create_permission

@@ -27,6 +27,27 @@ describe RepaymentFrequencyLoanChange do
     end
   end
 
+  describe "repayment_frequency_id=" do
+    let(:presenter) { FactoryGirl.build(:repayment_frequency_loan_change) }
+    before { presenter.repayment_frequency_id = value }
+    subject { presenter.repayment_frequency_id }
+
+    context "with number" do
+      let(:value) { 1 }
+      it { should == 1 }
+    end
+
+    context "with string" do
+      let(:value) { '1' }
+      it { should == 1 }
+    end
+
+    context "with blank" do
+      let(:value) { ' ' }
+      it { should == nil }
+    end
+  end
+
   describe '#save' do
     let(:user) { FactoryGirl.create(:lender_user) }
     let(:loan) { FactoryGirl.create(:loan, :guaranteed, repayment_duration: 60, repayment_frequency_id: RepaymentFrequency::Annually.id) }

@@ -6,7 +6,7 @@ describe 'loan change' do
   let(:current_user) { FactoryGirl.create(:lender_user, lender: loan.lender) }
   before { login_as(current_user, scope: :user) }
 
-  let(:loan) { FactoryGirl.create(:loan, :guaranteed, amount: Money.new(100_000_00), maturity_date: Date.new(2014, 12, 25), repayment_duration: 60) }
+  let(:loan) { FactoryGirl.create(:loan, :guaranteed, amount: Money.new(100_000_00), maturity_date: Date.new(2014, 12, 25), repayment_duration: 60, repayment_frequency_id: RepaymentFrequency::Quarterly.id) }
 
   before do
     loan.initial_draw_change.update_column(:date_of_change, Date.new(2009, 12, 25))
@@ -76,6 +76,39 @@ describe 'loan change' do
     end
   end
 
+  context 'repayment_frequency' do
+    before do
+      visit_loan_changes
+      click_link 'Repayment Frequency'
+    end
+
+    it 'works' do
+      fill_in :date_of_change, '11/9/10'
+      fill_in :initial_draw_amount, '65,432.10'
+
+      select :repayment_frequency_id, RepaymentFrequency::Monthly.name
+
+      Timecop.freeze(2010, 9, 1) do
+        click_button 'Submit'
+      end
+
+      loan_change = loan.loan_changes.last!
+      loan_change.change_type.should == ChangeType::RepaymentFrequency
+      loan_change.date_of_change.should == Date.new(2010, 9, 11)
+      loan_change.repayment_frequency_id.should == RepaymentFrequency::Monthly.id
+      loan_change.old_repayment_frequency_id.should == RepaymentFrequency::Quarterly.id
+
+      premium_schedule = loan.premium_schedules.last!
+      premium_schedule.initial_draw_amount.should == Money.new(65_432_10)
+      premium_schedule.premium_cheque_month.should == '12/2010'
+      premium_schedule.repayment_duration.should == 48
+
+      loan.reload
+      loan.modified_by.should == current_user
+      loan.repayment_frequency_id.should == RepaymentFrequency::Monthly.id
+    end
+  end
+
   context 'reprofile_draws' do
     before do
       visit_loan_changes
@@ -128,5 +161,9 @@ describe 'loan change' do
     def visit_loan_changes
       visit loan_path(loan)
       click_link 'Change Amount or Terms'
+    end
+
+    def select(attribute, value)
+      page.select value, from: "loan_change_#{attribute}"
     end
 end

@@ -1,19 +1,23 @@
 class RepaymentFrequencyLoanChange < LoanChangePresenter
-  ValidRepaymentFrequencyIds = [
+  ValidRepaymentFrequencies = [
     RepaymentFrequency::Annually,
     RepaymentFrequency::SixMonthly,
     RepaymentFrequency::Quarterly,
     RepaymentFrequency::Monthly,
     RepaymentFrequency::InterestOnly,
-  ].map(&:id)
+  ]
 
   attr_accessible :repayment_frequency_id
-  attr_accessor :repayment_frequency_id
+  attr_reader :repayment_frequency_id
 
-  validates_inclusion_of :repayment_frequency_id, in: ValidRepaymentFrequencyIds
+  validates_inclusion_of :repayment_frequency_id, in: ValidRepaymentFrequencies.map(&:id)
   validate :changed_repayment_frequency
 
   before_save :update_repayment_frequency_ids
+
+  def repayment_frequency_id=(id)
+    @repayment_frequency_id = id.blank? ? nil : id.to_i
+  end
 
   private
 
