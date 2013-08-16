@@ -9,7 +9,8 @@ class ChangeType < StaticAssociation
     { id: '7', name: 'Record agreed draw' },
     { id: '8', name: 'Reprofile draws' },
     { id: '9', name: 'Data correction' },
-    { id: 'a', name: 'Decrease term' }
+    { id: 'a', name: 'Decrease term' },
+    { id: 'b', name: 'Repayment frequency' },
   ]
 
   def self.for_loan_change
@@ -26,4 +27,5 @@ class ChangeType < StaticAssociation
   ReprofileDraws = find('8')
   DataCorrection = find('9')
   DecreaseTerm = find('a')
+  RepaymentFrequency = find('b')
 end

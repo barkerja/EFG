@@ -21,5 +21,9 @@ FactoryGirl.define do
     end
 
     factory :reprofile_draws_loan_change, class: ReprofileDrawsLoanChange
+
+    factory :repayment_frequency_loan_change, class: RepaymentFrequencyLoanChange do
+      repayment_frequency_id RepaymentFrequency::Annually.id
+    end
   end
 end
