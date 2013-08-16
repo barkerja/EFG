@@ -42,7 +42,8 @@ describe AgreedDraw do
 
   describe '#save' do
     let(:user) { FactoryGirl.create(:lender_user, lender: loan.lender) }
-    let(:loan) { FactoryGirl.create(:loan, :guaranteed) }
+    let(:yesterday) { 1.day.ago }
+    let(:loan) { FactoryGirl.create(:loan, :guaranteed, last_modified_at: yesterday) }
     let(:agreed_draw) {
       FactoryGirl.build(:agreed_draw,
         loan: loan,
@@ -65,7 +66,7 @@ describe AgreedDraw do
       loan_change.modified_date.should == Date.current
 
       loan.reload
-      loan.last_modified_at.should be_within(1).of(Time.now)
+      loan.last_modified_at.should > yesterday
       loan.modified_by.should == user
     end
   end
