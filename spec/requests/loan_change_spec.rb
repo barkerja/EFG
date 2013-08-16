@@ -78,9 +78,12 @@ describe 'loan change' do
 
   context 'repayment_frequency' do
     before do
+      Timecop.freeze(2010, 9, 1)
       visit_loan_changes
       click_link 'Repayment Frequency'
     end
+
+    after { Timecop.return }
 
     it 'works' do
       fill_in :date_of_change, '11/9/10'
@@ -88,9 +91,7 @@ describe 'loan change' do
 
       select :repayment_frequency_id, RepaymentFrequency::Monthly.name
 
-      Timecop.freeze(2010, 9, 1) do
-        click_button 'Submit'
-      end
+      click_button 'Submit'
 
       loan_change = loan.loan_changes.last!
       loan_change.change_type.should == ChangeType::RepaymentFrequency
@@ -106,6 +107,12 @@ describe 'loan change' do
       loan.reload
       loan.modified_by.should == current_user
       loan.repayment_frequency_id.should == RepaymentFrequency::Monthly.id
+
+      click_link 'Loan Changes'
+      click_link 'Repayment frequency'
+
+      page.should have_content('Monthly')
+      page.should have_content('Quarterly')
     end
   end
 

@@ -7,6 +7,8 @@ module LoanModificationsHelper
       value.name
     when Money
       value.format
+    when RepaymentFrequency
+      value.name
     else
       value
     end
