@@ -46,7 +46,5 @@ class DataCorrectionPresenter
     end
 
     true
-  rescue ActiveRecord::RecordInvalid
-    false
   end
 end
