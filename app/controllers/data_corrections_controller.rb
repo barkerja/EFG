@@ -7,7 +7,7 @@ class DataCorrectionsController < ApplicationController
 
   before_filter :verify_create_permission
   before_filter :load_loan
-  before_filter :load_presenter, only: [:new, :create]
+  before_filter :load_presenter_or_redirect, only: [:new, :create]
 
   def index
   end
@@ -30,7 +30,7 @@ class DataCorrectionsController < ApplicationController
       @loan = current_lender.loans.correctable.find(params[:loan_id])
     end
 
-    def load_presenter
+    def load_presenter_or_redirect
       klass = TYPES[params[:type]]
 
       if klass
