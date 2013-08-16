@@ -2,6 +2,9 @@ class BusinessNameDataCorrection < DataCorrectionPresenter
   attr_accessor :business_name
   attr_accessible :business_name
 
+  before_save :update_data_correction
+  before_save :update_loan
+
   validates :business_name, presence: true
 
   private

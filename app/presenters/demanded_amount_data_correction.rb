@@ -2,6 +2,9 @@ class DemandedAmountDataCorrection < DataCorrectionPresenter
   attr_reader :demanded_amount, :demanded_interest
   attr_accessible :demanded_amount, :demanded_interest
 
+  before_save :update_data_correction
+  before_save :update_loan
+
   validate :ensure_loan_is_demanded
   validate :ensure_value_entered
   validate :validate_demanded_amount

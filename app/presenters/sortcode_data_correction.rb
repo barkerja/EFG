@@ -2,6 +2,9 @@ class SortcodeDataCorrection < DataCorrectionPresenter
   attr_accessor :sortcode
   attr_accessible :sortcode
 
+  before_save :update_data_correction
+  before_save :update_loan
+
   validates :sortcode, presence: true
 
   private

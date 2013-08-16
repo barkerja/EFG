@@ -11,9 +11,6 @@ class DataCorrectionPresenter
 
   define_model_callbacks :save
 
-  before_save :update_data_correction
-  before_save :update_loan
-
   attr_accessor :created_by
   attr_reader :loan
 
@@ -52,11 +49,4 @@ class DataCorrectionPresenter
   rescue ActiveRecord::RecordInvalid
     false
   end
-
-  private
-    def update_data_correction
-    end
-
-    def update_loan
-    end
 end
